@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .price {
+            color: grey;
+            font-size: 22px;
+        }
+
+        .card button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+            .card button:hover {
+                opacity: 0.7;
+            }
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container-fluid" style="margin-top:10px">
+    <div class="row">
+        <div class="col-lg-3">
+            <h2> Categories</h2>
+            <div class="w3-bar-block w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">Fashion</a>
+                <a href="#" class="w3-bar-item w3-button">Furniture</a>
+                <a href="#" class="w3-bar-item w3-button">Home Appliances</a>
+                <a href="#" class="w3-bar-item w3-button">Antique</a>
+            </div>
+            <hr />
+            <h4>@Html.ActionLink("Add Your Product ", "Sale", "Sale") <i class="fa fa-plus-square" style="font-size:36px;color:red"></i> </h4>
+            <h4>@Html.ActionLink("View My Products ", "YourProducts", "Sale") <i class="fa fa-plus-square" style="font-size:36px;color:red"></i> </h4>
+
+
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-8">Welcome @HttpContext.Current.User.Identity.Name</div>
+                <div class="col-lg-4" style="text-align:right">
+                    
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out" style="color:greenyellow;font-size:30px;" aria-hidden="true"></i></a>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="~/images/antiq1.png" alt="Gramaphone" style="width:100%">
+                        <h5>Gramaphone</h5>
+                        <p class="price">Rs 5000</p>
+                        <p><button>Add to Cart</button></p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="~/images/antiq2.png" alt="Gramaphone" style="width:100%">
+                        <h5>Camera</h5>
+                        <p class="price">Rs 4000</p>
+                        <p><button>Add to Cart</button></p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="~/images/chair1.png"s alt="Gramaphone" style="width:100%">
+                        <h5>Chair</h5>
+                        <p class="price">Rs 6000</p>
+                        s<p><button>Add to Cart</button></p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="~/images/shoes.jpg" alt="Gramaphone" style="width:100%">
+                        <h5>Shoes</h5>
+                        <p class="price">Rs 700</p>
+                        <p><button>Add to Cart</button></p>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+@*<div class="topnav">
+    <ul class="nav navbar-nav">
+
+        <li>@Html.ActionLink("Bid", "About", "Home")</li>
+        <li>@Html.ActionLink("Sell", "Contact", "Home")</li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <p style="margin:10px 10px 10px 10px;color:white;">
+                Welcome @HttpContext.Current.User.Identity.Name
+            </p>
+        </li>
+        <li>
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                }
+            }
+        </li>
+    </ul>
+
+</div>*@
+
+
+
+
+
+

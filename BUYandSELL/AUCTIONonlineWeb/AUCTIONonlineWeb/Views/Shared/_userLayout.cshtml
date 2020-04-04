@@ -1,0 +1,94 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bid And Sell</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align:center;color:darkblue;">Online Auction - Bid And Sell</h1>
+        <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align:center;color:darkblue;">Place Your Bid And Make it in Your Hands</p>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Bid&Sell", "login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="row">
+            <div class="col-lg-3">
+                <h2> Categories</h2>
+                <div class="w3-bar-block w3-light-grey">
+                    <a href="#" class="w3-bar-item w3-button">Fashion</a>
+                    <a href="#" class="w3-bar-item w3-button">Furniture</a>
+                    <a href="#" class="w3-bar-item w3-button">Home Appliances</a>
+                    <a href="#" class="w3-bar-item w3-button">Antique</a>
+                </div>
+                <hr />
+                <h4>@Html.ActionLink("Add Your Product ", "Sale", "Sale") <i class="fa fa-plus-square" style="font-size:36px;color:red"></i> </h4>
+                <h4>@Html.ActionLink("View My Products ", "YourProducts", "Sale") <i class="fa fa-plus-square" style="font-size:36px;color:red"></i> </h4>
+
+
+
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-8">Welcome @HttpContext.Current.User.Identity.Name</div>
+                    <div class="col-lg-4" style="text-align:right">
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a href="javascript:document.getElementById('logoutForm').submit()"><strong style="color:darkgreen;font-size:20px;">Logout&nbsp;<i class="fa fa-sign-out" style="color:darkgreen;font-size:30px;" aria-hidden="true"></i></strong></a>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row" style="margin-left:5px;margin-top:5px;">
+
+                    @RenderBody()
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <hr />
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Bid&Sell</p>
+        </footer>
+    </div>
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

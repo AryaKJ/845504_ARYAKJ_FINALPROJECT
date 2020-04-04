@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AUCTIONonlineWeb.Models.Sale>
+
+@{
+    ViewBag.Title = "YourProducts";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+}
+
+<h2>YourProducts</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDiscription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.SaleDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.UserId == ViewBag.id)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDiscription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    | @Html.ActionLink("Details", "Details", new { id = item.SaleId })
+                </td>
+
+            </tr>
+        }
+
+    }
+
+</table>
+
+<hr />
+<div class="row" style="text-align:right;margin-right:100px">
+
+    <h4><strong><i class="fa fa-home" aria-hidden="true" style="font:40px"></i>@Html.ActionLink("Back to Home", "Index", "Home")</strong> </h4>
+</div>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionWebPrjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Identity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+    <Property Name="AuthenticationCode" Type="Guid" Nullable="false" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bids" Relationship="AuctionWebPrjectModel.FK__Bids__UserId__2A4B4B5E" FromRole="User" ToRole="Bid" />
+    <NavigationProperty Name="Sales" Relationship="AuctionWebPrjectModel.FK__Sales__UserId__267ABA7A" FromRole="User" ToRole="Sale" />
+  </EntityType>
+  <EntityContainer Name="AuctionWebPrjectEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="StateLists" EntityType="AuctionWebPrjectModel.StateList" />
+    <EntitySet Name="Bids" EntityType="AuctionWebPrjectModel.Bid" />
+    <EntitySet Name="Sales" EntityType="AuctionWebPrjectModel.Sale" />
+    <AssociationSet Name="FK__Bids__SaleId__29572725" Association="AuctionWebPrjectModel.FK__Bids__SaleId__29572725">
+      <End Role="Sale" EntitySet="Sales" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bids__UserId__2A4B4B5E" Association="AuctionWebPrjectModel.FK__Bids__UserId__2A4B4B5E">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__UserId__267ABA7A" Association="AuctionWebPrjectModel.FK__Sales__UserId__267ABA7A">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+    <EntitySet Name="ImageDatabases" EntityType="AuctionWebPrjectModel.ImageDatabase" />
+    <AssociationSet Name="FK__ImageData__SaleI__49C3F6B7" Association="AuctionWebPrjectModel.FK__ImageData__SaleI__49C3F6B7">
+      <End Role="Sale" EntitySet="Sales" />
+      <End Role="ImageDatabase" EntitySet="ImageDatabases" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="StateList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Bid">
+    <Key>
+      <PropertyRef Name="SerialNo" />
+    </Key>
+    <Property Name="SerialNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SaleId" Type="Int32" Nullable="false" />
+    <Property Name="BidAmount" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="BidTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Sale" Relationship="AuctionWebPrjectModel.FK__Bids__SaleId__29572725" FromRole="Bid" ToRole="Sale" />
+    <NavigationProperty Name="User" Relationship="AuctionWebPrjectModel.FK__Bids__UserId__2A4B4B5E" FromRole="Bid" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SaleId" />
+    </Key>
+    <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDiscription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InitialAmount" Type="Double" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FinalAmount" Type="Double" />
+    <Property Name="SaleTime" Type="DateTime" Precision="3" />
+    <Property Name="SaleDuration" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Bids" Relationship="AuctionWebPrjectModel.FK__Bids__SaleId__29572725" FromRole="Sale" ToRole="Bid" />
+    <NavigationProperty Name="User" Relationship="AuctionWebPrjectModel.FK__Sales__UserId__267ABA7A" FromRole="Sale" ToRole="User" />
+    <NavigationProperty Name="ImageDatabases" Relationship="AuctionWebPrjectModel.FK__ImageData__SaleI__49C3F6B7" FromRole="Sale" ToRole="ImageDatabase" />
+  </EntityType>
+  <Association Name="FK__Bids__SaleId__29572725">
+    <End Type="AuctionWebPrjectModel.Sale" Role="Sale" Multiplicity="1" />
+    <End Type="AuctionWebPrjectModel.Bid" Role="Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleId" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bids__UserId__2A4B4B5E">
+    <End Type="AuctionWebPrjectModel.User" Role="User" Multiplicity="1" />
+    <End Type="AuctionWebPrjectModel.Bid" Role="Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__UserId__267ABA7A">
+    <End Type="AuctionWebPrjectModel.User" Role="User" Multiplicity="1" />
+    <End Type="AuctionWebPrjectModel.Sale" Role="Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ImageDatabase">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="SaleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sale" Relationship="AuctionWebPrjectModel.FK__ImageData__SaleI__49C3F6B7" FromRole="ImageDatabase" ToRole="Sale" />
+  </EntityType>
+  <Association Name="FK__ImageData__SaleI__49C3F6B7">
+    <End Type="AuctionWebPrjectModel.Sale" Role="Sale" Multiplicity="1" />
+    <End Type="AuctionWebPrjectModel.ImageDatabase" Role="ImageDatabase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="SaleId" />
+      </Principal>
+      <Dependent Role="ImageDatabase">
+        <PropertyRef Name="SaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

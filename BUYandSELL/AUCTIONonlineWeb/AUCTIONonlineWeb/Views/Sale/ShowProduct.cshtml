@@ -1,0 +1,52 @@
+﻿@model AUCTIONonlineWeb.Models.Sale
+
+@{
+    ViewBag.Title = "ShowProduct";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+}
+
+<h2>ShowProduct</h2>
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Sale</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductDiscription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductDiscription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+   
+
+
+        </dl>
+    </div>
+    <div class="col-lg-6">
+        <img src="@Url.Content(Model.Image)" />
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SaleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
